@@ -1,3 +1,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+-- nnoremap gpd <cmd>lua require('goto-preview').goto_preview_definition()<CR>
+-- nnoremap gpt <cmd>lua require('goto-preview').goto_preview_type_definition()<CR>
+-- nnoremap gpi <cmd>lua require('goto-preview').goto_preview_implementation()<CR>
+-- nnoremap gpD <cmd>lua require('goto-preview').goto_preview_declaration()<CR>
+-- nnoremap gP <cmd>lua require('goto-preview').close_all_win()<CR>
+-- nnoremap gpr <cmd>lua require('goto-preview').goto_preview_references()<CR>
