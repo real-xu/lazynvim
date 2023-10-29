@@ -10,10 +10,13 @@ return {
   { "savq/melange-nvim" },
   -- {"cpea2506/one_monokai.nvim"},
   { "Mofiqul/vscode.nvim" },
+  -- { "Tsuzat/NeoSolarized.nvim" },
+  -- { "neanias/everforest-nvim" },
+  -- { "ray-x/starry.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "vscode",
       -- colorscheme = "monokai",
       -- colorscheme = "melange",
       -- transparent = true,
