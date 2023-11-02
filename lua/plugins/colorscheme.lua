@@ -13,10 +13,11 @@ return {
   -- { "Tsuzat/NeoSolarized.nvim" },
   -- { "neanias/everforest-nvim" },
   -- { "ray-x/starry.nvim" },
+  { "kepano/flexoki-neovim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "vscode",
+      colorscheme = "flexoki-light",
       -- colorscheme = "monokai",
       -- colorscheme = "melange",
       -- transparent = true,
