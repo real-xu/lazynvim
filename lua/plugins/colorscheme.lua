@@ -10,17 +10,21 @@ return {
   { "savq/melange-nvim" },
   -- {"cpea2506/one_monokai.nvim"},
   { "Mofiqul/vscode.nvim" },
+
+  -- { "AstroNvim/astrotheme" },
+  -- { "oxfist/night-owl.nvim" },
   -- { "Tsuzat/NeoSolarized.nvim" },
   -- { "neanias/everforest-nvim" },
   -- { "ray-x/starry.nvim" },
-  { "kepano/flexoki-neovim" },
+  -- { "kepano/flexoki-neovim" },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "flexoki-light",
-      -- colorscheme = "monokai",
-      -- colorscheme = "melange",
-      -- transparent = true,
+      -- colorscheme = "flexoki-light",
+      -- colorscheme = "astrolight",
+      colorscheme = "melange",
+      -- colorscheme = "night-owl",
+      transparent = true,
     },
   },
 }

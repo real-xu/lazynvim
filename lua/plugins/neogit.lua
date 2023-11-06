@@ -2,7 +2,7 @@ return {
   "NeogitOrg/neogit",
   keys = {
 
-    { "<leader>gn", "<cmd>Neogit<cr>", desc = "launch neogit" },
+    { "<leader>gn", "<cmd>Neogit<cr>", desc = "Launch neogit" },
   },
   dependencies = {
     "nvim-lua/plenary.nvim", -- required
