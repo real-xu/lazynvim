@@ -10,7 +10,9 @@ return {
   { "savq/melange-nvim" },
   -- {"cpea2506/one_monokai.nvim"},
   { "Mofiqul/vscode.nvim" },
-
+  { "catppuccin/nvim" },
+  -- { "shaunsingh/solarized.nvim" },
+  { "maxmx03/solarized.nvim" },
   -- { "AstroNvim/astrotheme" },
   -- { "oxfist/night-owl.nvim" },
   -- { "Tsuzat/NeoSolarized.nvim" },
@@ -21,8 +23,8 @@ return {
     "LazyVim/LazyVim",
     opts = {
       -- colorscheme = "flexoki-light",
-      -- colorscheme = "astrolight",
-      colorscheme = "melange",
+      -- colorscheme = "melange",
+      colorscheme = "solarized",
       -- colorscheme = "night-owl",
       transparent = true,
     },
