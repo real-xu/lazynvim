@@ -26,7 +26,7 @@ return {
       -- colorscheme = "melange",
       colorscheme = "solarized",
       -- colorscheme = "night-owl",
-      transparent = true,
+      -- transparent = true,
     },
   },
 }
