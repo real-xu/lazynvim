@@ -14,3 +14,7 @@
 --     -- vim.notify("Update/Sync/Something is complete!")
 --   end,
 -- })
+-- vim.cmd('hi "IlluminatedWordText guibg=#504945 gui=bold"')
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  command = "hi IlluminatedWordText guibg=#504945 gui=bold",
+})
