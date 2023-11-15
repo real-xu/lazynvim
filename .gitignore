@@ -8,3 +8,5 @@ foo.*
 data
 mason
 lazy
+.netrwhist
+telescope_history
