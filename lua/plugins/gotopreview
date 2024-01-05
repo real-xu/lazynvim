@@ -1,0 +1,15 @@
+return {
+  "rmagatti/goto-preview",
+  config = function()
+    require("goto-preview").setup({})
+  end,
+
+  keys = {
+    { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>" },
+    { "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>" },
+    { "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>" },
+    { "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>" },
+    { "gP", "<cmd>lua require('goto-preview').close_all_win()<CR>" },
+    { "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>" },
+  },
+}

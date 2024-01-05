@@ -5,6 +5,8 @@ return {
   config = function()
     vim.o.background = "light" -- or 'light'
 
-    vim.cmd.colorscheme("solarized")
+    terminal_colors =
+      true, -- add neovim terminal colors
+      vim.cmd.colorscheme("solarized")
   end,
 }
