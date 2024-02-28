@@ -1,6 +1,7 @@
 return {
   "meatballs/notebook.nvim",
+  lazy = false,
   config = function()
-    require("notebook").setup()
+    require("notebook").setup({})
   end,
 }
