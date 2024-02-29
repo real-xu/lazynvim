@@ -1,7 +1,3 @@
--- if true then
---   return {}
--- end
-
 return {
   {
     "catppuccin/nvim",
@@ -24,9 +20,17 @@ return {
     end,
   },
   {
+    "morhetz/gruvbox",
+    lazy = true,
+    name = "gruvbox",
+    config = function()
+      vim.o.background = "light"
+    end,
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "gruvbox",
     },
   },
 }
