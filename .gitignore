@@ -10,3 +10,4 @@ mason
 lazy
 .netrwhist
 telescope_history
+tree-sitter-rust
