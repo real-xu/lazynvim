@@ -5,7 +5,15 @@ return {
       ensure_installed = {
         "svelte",
       },
-      servers = { eslint = {} },
+      servers = {
+        eslint = {
+          settings = {
+            -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
+            workingDirectories = { mode = "location" },
+          },
+
+        }
+      },
       setup = {
         eslint = function()
           require("lazyvim.util").lsp.on_attach(function(client)
