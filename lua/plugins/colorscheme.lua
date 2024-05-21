@@ -15,7 +15,7 @@ return {
     name = "onedark",
     config = function()
       require("onedark").setup({
-        style = "warmer",
+        style = "light",
       })
     end,
   },
@@ -24,13 +24,13 @@ return {
     lazy = true,
     name = "gruvbox",
     config = function()
-      vim.o.background = "light"
+      vim.o.background = "dark"
     end,
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "onedark",
     },
   },
 }
