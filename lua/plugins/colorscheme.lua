@@ -15,7 +15,7 @@ return {
     name = "onedark",
     config = function()
       require("onedark").setup({
-        style = "light",
+        style = "warmer",
       })
     end,
   },
