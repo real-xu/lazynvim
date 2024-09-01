@@ -10,6 +10,14 @@ return {
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
       },
+      {
+        "<leader>qw",
+        function()
+          print("This is a test")
+          require("session_manager").save_current_session()
+        end,
+        desc = "Write current session",
+      },
     },
     -- change some options
     opts = {
