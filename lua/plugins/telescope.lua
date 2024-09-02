@@ -1,3 +1,14 @@
+function GET_SESSION_PATH()
+  local session_manager = require("session_manager")
+  local current_session = session_manager.session_filename
+  if current_session then
+    local session_path = session_manager.get_session_file(current_session)
+    return session_path:absolute()
+  else
+    return nil
+  end
+end
+
 return {
   -- change some telescope options and a keymap to browse plugin files
   {
@@ -9,14 +20,6 @@ return {
         "<leader>fp",
         function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
         desc = "Find Plugin File",
-      },
-      {
-        "<leader>qw",
-        function()
-          print("This is a test")
-          require("session_manager").save_current_session()
-        end,
-        desc = "Write current session",
       },
     },
     -- change some options
