@@ -10,12 +10,41 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    { import = "plugins" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { 'norcalli/nvim-colorizer.lua' },
+    { 'nvim-treesitter/nvim-treesitter' },
+    { 'nvim-treesitter/playground' },
+    { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    { 'nvim-treesitter/nvim-treesitter-refactor' },
+    { 'nvim-treesitter/nvim-treesitter-context' },
+    { 'nvim-treesitter/nvim-treesitter-highlight' },
+    { 'nvim-treesitter/nvim-treesitter-indent' },
+    { 'norcalli/nvim-colorizer.lua' },
+    -- lua with lazy.nvim
+    { 'folke/lua-dev.nvim' },
+    { 'folke/trouble.nvim' },
+    { 'folke/todo-comments.nvim' },
+    { 'folke/which-key.nvim' },
+    { 'folke/zen-mode.nvim' },
+    { 'folke/twilight.nvim' },
+    { 'folke/lsp-colors.nvim' },
+    { 'folke/lsp-trouble'},
+} 
+  "danielfalk/smart-open.nvim",
+  branch = "0.2.x",
+  config = function()
+    require("telescope").load_extension("smart_open")
+  end,
+  dependencies = {
+    "kkharji/sqlite.lua",
+    -- Only required if using match_algorithm fzf
+    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
+    { "nvim-telescope/telescope-fzy-native.nvim" },
+    { 'petertriho/nvim-scrollbar' },
+  },
+} 
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
