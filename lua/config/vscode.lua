@@ -8,7 +8,7 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- add LazyVim and import its pluginjs
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
@@ -18,10 +18,7 @@ require("lazy").setup({
     { 'nvim-treesitter/nvim-treesitter-textobjects' },
     { 'nvim-treesitter/nvim-treesitter-refactor' },
     { 'nvim-treesitter/nvim-treesitter-context' },
-    { 'nvim-treesitter/nvim-treesitter-highlight' },
-    { 'nvim-treesitter/nvim-treesitter-indent' },
     { 'norcalli/nvim-colorizer.lua' },
-    -- lua with lazy.nvim
     { 'folke/lua-dev.nvim' },
     { 'folke/trouble.nvim' },
     { 'folke/todo-comments.nvim' },
@@ -29,27 +26,13 @@ require("lazy").setup({
     { 'folke/zen-mode.nvim' },
     { 'folke/twilight.nvim' },
     { 'folke/lsp-colors.nvim' },
-    { 'folke/lsp-trouble'},
-} 
-  "danielfalk/smart-open.nvim",
-  branch = "0.2.x",
-  config = function()
-    require("telescope").load_extension("smart_open")
-  end,
-  dependencies = {
-    "kkharji/sqlite.lua",
-    -- Only required if using match_algorithm fzf
-    -- { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    -- Optional.  If installed, native fzy will be used when match_algorithm is fzy
     { "nvim-telescope/telescope-fzy-native.nvim" },
-    { 'petertriho/nvim-scrollbar' },
-  },
-} 
+    { 'petertriho/nvim-scrollbar' }
   },
   defaults = {
     -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
-    lazy = true,
+    lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
