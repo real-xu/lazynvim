@@ -36,7 +36,6 @@ M.config = function()
 			{ name = "nvim_lsp" },
 			{ name = "nvim_lua" },
 			{ name = "luasnip" }, -- For luasnip users.
-			-- { name = "orgmode" },
 		}, {
 			{ name = "buffer" },
 			{ name = "path" },
@@ -51,6 +50,7 @@ M.config = function()
 			{ name = "cmdline" },
 		}),
 	})
+
 end
 
 return M
