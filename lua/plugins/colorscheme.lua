@@ -24,17 +24,15 @@ return {
     lazy = true,
     name = "gruvbox",
     config = function()
-      vim.o.background = "dark"
+      vim.g.gruvbox_contrast_dark = "soft"
+      vim.g.gruvbox_contrast_light = "soft"
+      vim.o.background = "light"
     end,
-  },
-  {
-    "EdenEast/nightfox.nvim",
-    name = "nightfox",
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "dayfox",
+      colorscheme = "gruvbox",
     },
   },
 }
