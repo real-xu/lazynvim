@@ -28,9 +28,13 @@ return {
     end,
   },
   {
+    "EdenEast/nightfox.nvim",
+    name = "nightfox",
+  },
+  {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "onedark",
+      colorscheme = "dayfox",
     },
   },
 }
