@@ -30,17 +30,18 @@ return {
     end,
   },
   {
-    "altercation/vim-colors-solarized",
+    "lifepillar/vim-solarized8",
     lazy = true,
-    name = "solarized",
+    name = "solarized8",
     config = function()
       -- Set Vim global variables for Solarized
       vim.g.solarized_termcolors = 256
-      vim.g.solarized_bold = true
-      vim.g.solarized_underline = true
-      vim.g.solarized_italic = true
+      -- vim.g.solarized_bold = true
+      -- vim.g.solarized_underline = true
+      -- vim.g.solarized_italic = true
       vim.g.solarized_visibility = "low" -- Options: 'normal', 'low', 'high'
       vim.g.solarized_diffmode = "low"
+      vim.opt.termguicolors = true
 
       -- Set background to light or dark
       vim.o.background = "light" -- or "dark"
@@ -49,7 +50,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "solarized8",
     },
   },
 }
