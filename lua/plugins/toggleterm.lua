@@ -2,10 +2,11 @@ return {
   -- amongst your other plugins
   -- { "akinsho/toggleterm.nvim", version = "*", config = true },
   -- or
-  {'akinsho/toggleterm.nvim', 
+  {
+    'akinsho/toggleterm.nvim', 
     version = "*", 
     opts = {--[[ things you want to change go here]]
-      direction = "horiztonal",
+      direction = "vertical",
     },
     config = function()
 			local toggleterm = require('toggleterm')
@@ -19,6 +20,6 @@ return {
 			nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 			inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 			]]
-		end,  
+		end,
   }
 } 
