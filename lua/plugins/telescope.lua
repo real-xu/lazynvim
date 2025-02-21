@@ -41,7 +41,6 @@ return {
       build = "make",
       config = function()
         require("telescope").load_extension("fzf")
-        require("telescope.builtin").live_grep({ search_dirs = { "~/.ssh/known_hosts" } })
       end,
     },
   },
