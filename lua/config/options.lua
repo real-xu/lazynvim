@@ -2,3 +2,6 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 vim.opt.wrap = true
+vim.g.perl_host_prog = '/usr/bin/perl'
+vim.g.loaded_perl_provider = 0
+

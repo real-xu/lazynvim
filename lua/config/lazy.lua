@@ -10,6 +10,8 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "nvim-notify", enabled = false },
+    { "neodev-nvim", enabled = false },
     -- import any extras modules here
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
@@ -32,9 +34,8 @@ require("lazy").setup({
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
-        "noice",
-        "notify"
-        -- "gzip",
+        "gzip",
+        "neovim.dev",
         -- "matchit",
         -- "matchparen",
         -- "netrwPlugin",

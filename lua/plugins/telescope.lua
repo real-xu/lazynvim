@@ -1,3 +1,14 @@
+function GET_SESSION_PATH()
+  local session_manager = require("session_manager")
+  local current_session = session_manager.session_filename
+  if current_session then
+    local session_path = session_manager.get_session_file(current_session)
+    return session_path:absolute()
+  else
+    return nil
+  end
+end
+
 return {
   -- change some telescope options and a keymap to browse plugin files
   {
