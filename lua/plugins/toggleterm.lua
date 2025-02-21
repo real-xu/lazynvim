@@ -3,15 +3,16 @@ return {
   -- { "akinsho/toggleterm.nvim", version = "*", config = true },
   -- or
   {
-    'akinsho/toggleterm.nvim', 
-    version = "*", 
-    opts = {--[[ things you want to change go here]]
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    opts = { --[[ things you want to change go here]]
       direction = "vertical",
+      shell = "/opt/homebrew/bin/tmux",
     },
     config = function()
-			local toggleterm = require('toggleterm')
-			toggleterm.setup()
-			vim.cmd [[
+      local toggleterm = require("toggleterm")
+      toggleterm.setup()
+      vim.cmd([[
 			tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 			" By applying the mappings this way you can pass a count to your
@@ -19,7 +20,7 @@ return {
 			" For example: 2<C-t> will open terminal 2
 			nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 			inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
-			]]
-		end,
-  }
-} 
+			]])
+    end,
+  },
+}

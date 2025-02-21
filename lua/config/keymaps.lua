@@ -8,12 +8,9 @@
 --   "<cmd>SomeCommandName<CR>", -- Replace "SomeCommandName" with your desired command
 --   { noremap = true, silent = true }
 -- )
-
-
 vim.api.nvim_set_keymap(
   "n",
-  "<leader>qw",
-  "<cmd>SessionManager save_current_session<CR>",
+  "<^P>",
+  "<cmd>lua dev_print('Key combo detected!')<CR>",
   { noremap = true, silent = true }
 )
-
