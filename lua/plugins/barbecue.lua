@@ -1,12 +1,16 @@
 return {
-  "utilyre/barbecue.nvim",
-  name = "barbecue",
-  version = "*",
-  dependencies = {
-    "SmiteshP/nvim-navic",
-    "nvim-tree/nvim-web-devicons", -- optional dependency
-  },
-  opts = {
-    -- configurations go here
+  {
+    "utilyre/barbecue.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = false, -- Load eagerly
+    priority = 999, -- Ensure it loads after devicons
+    config = function()
+      require("barbecue").setup()
+      require("nvim-navic").setup({})
+    end,
   },
 }
