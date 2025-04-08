@@ -4,8 +4,6 @@
 vim.keymap.set("n", "<D-s>", ":w<CR>", { desc = "Save file", silent = true })
 vim.keymap.set("i", "<D-s>", "<Esc>:w<CR>a", { desc = "Save file", silent = true })
 vim.g.neovide_input_macos_option_key_is_meta = "only_left"
-
-vim.api.nvim_echo({ { "Terminal toggle binding loaded!", "Normal" } }, true, {})
 -- Terminal keybindings with Ctrl+`
 vim.keymap.set({ "n", "t" }, "<C-`>", function()
   local term_bufnrs = {}
