@@ -23,12 +23,12 @@ return {
           "typescript.tsx",
         },
         settings = {
-          preferences = {
-            importModuleSpecifierPreference = "relative",
-          },
           -- format on save
           complete_function_calls = true,
           vtsls = {
+            preferences = {
+              importModuleSpecifierPreference = "relative",
+            },
             enableMoveToFileCodeAction = true,
             autoUseWorkspaceTsdk = true,
             experimental = {
