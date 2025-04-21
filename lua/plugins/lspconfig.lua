@@ -23,6 +23,9 @@ return {
           "typescript.tsx",
         },
         settings = {
+          preferences = {
+            importModuleSpecifierPreference = "relative",
+          },
           -- format on save
           complete_function_calls = true,
           vtsls = {
