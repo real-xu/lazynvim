@@ -37,10 +37,25 @@ return {
   {
     "telescope.nvim",
     dependencies = {
+      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-fzf-native.nvim",
       build = "make",
       config = function()
-        require("telescope").load_extension("fzf")
+        local telescope = require("telescope")
+        local builtin = require("telescope.builtin")
+
+        -- Load fzf extension
+        telescope.load_extension("fzf")
+
+        -- Configure telescope settings
+        telescope.setup({
+          defaults = {
+            layout_strategy = "horizontal",
+            sorting_strategy = "ascending",
+            layout_config = { prompt_position = "top" },
+            winblend = 0,
+          },
+        })
       end,
     },
   },
