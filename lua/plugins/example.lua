@@ -1,14 +1,29 @@
 -- since this is just an example spec, don't actually load anything here and return an empty spec
 -- stylua: ignore
 return {
-  'tomasr/molokai', -- colorscheme
+  {
+    'tomasr/molokai', -- colorscheme
+    config = function()
+      vim.cmd.colorscheme("molokai")
+    end,
+  },
+  {
+      "lervag/vimtex",
+      lazy = false,     -- we don't want to lazy load VimTeX
+      init = function()
+        vim.g.vimtex_view_method = "skim"
+        vim.g.vimtex_view_skim_sync = 1
+        vim.g.vimtex_view_skim_activate = 1
+      end
+  },
   {"mfussenegger/nvim-lint",
   opts = {
     linters_by_ft = {
       sh = { "shellcheck" },
+      tex = { "chktex" },
     },
   },
-  config = function(_, opts)
+  config = function()
       local lint = require("lint")
       lint.linters.ruff.args = { "--ignore=E401", }
   end
@@ -19,6 +34,7 @@ return {
       python = { "black" },
       sh = { "shfmt" },
       lua = { "stylua" },
+      tex = { "latexindent" },
     },
   }},
   {"neovim/nvim-lspconfig",
@@ -36,15 +52,6 @@ return {
   },
   config = function()
     require("dap-python").setup("python")
-  end,
-  },
-  {
-  "github/copilot.vim",
-  config = function()
-    vim.g.copilot_no_tab_map = false
-    vim.api.nvim_set_keymap("i", "<C-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
-    -- Use a different keybinding for accepting suggestions, for terminal mode.
-    vim.api.nvim_set_keymap("i", "<C-M>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
   end,
   },
   {

@@ -15,6 +15,9 @@ map_nv("<BS>", '"_d', { desc = "Delete selection with Del" })
 map_all_mode("<F5>", function()
   require("dap").continue()
 end, { desc = "DAP: Continue" })
+map_all_mode("<F6>", function()
+  require("dap").run_last()
+end, { desc = "DAP: Use last config" })
 map_all_mode("<F10>", function()
   require("dap").step_over()
 end, { desc = "DAP: Step Over" })
@@ -27,6 +30,12 @@ end, { desc = "DAP: Step Out" })
 vim.keymap.set("n", "\\b", function()
   require("dap").toggle_breakpoint()
 end, { desc = "DAP: Toggle Breakpoint" })
+
+--Git settings
+-- vim.keymap.set("n", "<leader>ga", function()
+--   require("Snacks").
+-- end, { desc = "Git: Find files" })
+
 if vim.g.neovide then
   vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
   vim.keymap.set("i", "<D-s>", "<C-O>:w<CR>")
