@@ -33,7 +33,7 @@ return {
     formatters_by_ft = {
       python = { "black" },
       sh = { "shfmt" },
-      lua = { "stylua" },
+      lua = { "/opt/homebrew/bin/lua" },
       tex = { "latexindent" },
     },
   }},
@@ -75,6 +75,43 @@ return {
   },
   -- See Commands section for default commands if you want to lazy load on them
   },
+  {
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        sources = {
+          files = {
+            hidden = true,
+            ignored = true,
+            exclude = {
+              "*.pdf",
+              "*.aux",
+              "*.bbl",
+              "*.bcf",
+              "*.blg",
+              "*.fdb_latexmk",
+              "*.fls",
+              "*.log",
+              "*.pdf",
+              "*.run%.xml",
+              "*.synctex%.gz",
+              "*.out",
+              "*.toc",
+              "*.pyc",
+              "*.pyo",
+              "*.xml",
+              "*.gz",
+              "*.DS_Store",
+              "*.zip",
+              "__pycache__",
+              "venv",
+              ".git",
+            },
+            },
+          },
+      },
+    }
+  }
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
