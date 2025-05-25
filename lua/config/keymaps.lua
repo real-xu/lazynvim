@@ -10,8 +10,10 @@ end
 local function map_all_mode(lhs, rhs, opts)
   map_nv(lhs, rhs, opts)
   vim.keymap.set("i", lhs, rhs, opts)
+  vim.keymap.set("t", lhs, rhs, opts)
 end
-map_nv("<BS>", '"_d', { desc = "Delete selection with Del" })
+-- TODO: make this work
+vim.keymap.set("v", "<BS>", '"_d', { noremap = true, desc = "Delete selection with Backspace" })
 map_all_mode("<F5>", function()
   require("dap").continue()
 end, { desc = "DAP: Continue" })
@@ -31,23 +33,21 @@ vim.keymap.set("n", "\\b", function()
   require("dap").toggle_breakpoint()
 end, { desc = "DAP: Toggle Breakpoint" })
 
---Git settings
--- vim.keymap.set("n", "<leader>ga", function()
---   require("Snacks").
--- end, { desc = "Git: Find files" })
-
-if vim.g.neovide then
-  vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-  vim.keymap.set("i", "<D-s>", "<C-O>:w<CR>")
-  vim.keymap.set("n", "<D-w>", ":CloseBuffer<CR>") -- Close
-  vim.keymap.set("i", "<D-w>", "<C-o>:CloseBuffer<CR>") -- Close
-  vim.keymap.set("i", "<D-z", function()
-    vim.cmd("undo")
-  end)
-  map_nv("<D-v>", '"+gP', { desc = "Paste from clipboard" })
-  vim.keymap.set("c", "<D-v>", "<C-r>+") -- Paste command mode
-  vim.keymap.set("i", "<D-v>", "<C-r>+", { noremap = true, silent = true })
-  vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
-  vim.keymap.set("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
-  map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
-end
+-- Now configure shortcuts for MacOS
+-- if vim.g.neovide then
+vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
+vim.keymap.set("i", "<D-s>", "<C-O>:w<CR>")
+map_all_mode("<D-w>", function()
+  local success, _ = pcall(function() vim.cmd('tabclose') end)
+  if not success then
+    vim.notify("Cannot close the last tab page", vim.log.levels.WARN)
+  end
+end, { desc = "Close current tab" })
+map_all_mode("<D-z>", function() vim.cmd("undo") end)
+vim.keymap.set("i", "<D-v>", '<C-O>"+gP')
+vim.keymap.set("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
+vim.keymap.set("v", "<D-v>", '"_d"+p', { desc = "Remove the selected part and paste from system clipboard." })
+vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
+vim.keymap.set("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
+map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
+-- end
