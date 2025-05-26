@@ -21,6 +21,12 @@ return {
       vim.g.vimtex_view_method = "skim"
       vim.g.vimtex_view_skim_sync = 1
       vim.g.vimtex_view_skim_activate = 1
+      vim.g.vimtex_toc_custom_matchers = {
+        { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
+        { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
+        { title = "Corollary",  re = [[\v^\s*\\begin\{corollary\}]] },
+        { title = "Definition", re = [[\v^\s*\\begin\{definition\}]] },
+      }
     end
   },
   {

@@ -44,7 +44,7 @@ map_all_mode("<D-w>", function()
   end
 end, { desc = "Close current tab" })
 map_all_mode("<D-z>", function() vim.cmd("undo") end)
-vim.keymap.set("i", "<D-v>", '<C-O>"+gP')
+vim.keymap.set("i", "<D-v>", '<C-O>"+p')
 vim.keymap.set("c", "<D-v>", "<C-R>+")
 vim.keymap.set("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
 vim.keymap.set("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
