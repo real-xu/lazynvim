@@ -9,6 +9,12 @@ local excluded_list = {
 }
 return {
   {
+    "LazyVim/LazyVim",
+    opts = {
+      kind_filter = { tex = true }
+    }
+  },
+  {
     'tomasr/molokai', -- colorscheme
     config = function()
       vim.cmd.colorscheme("molokai")
