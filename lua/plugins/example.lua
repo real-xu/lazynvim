@@ -115,6 +115,23 @@ return {
     config = function()
       vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle, { desc = "Toggle Undotree" })
     end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { "kdheepak/cmp-latex-symbols" },
+    },
+    sources = {
+      {
+        name = "latex_symbols",
+        option = {
+          strategy = 0, -- mixed
+        },
+      },
+    },
+  },
+  {
+    "latex-lsp/texlab",
   }
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
