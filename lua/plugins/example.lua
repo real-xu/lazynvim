@@ -21,6 +21,17 @@ return {
     end,
   },
   {
+    "folke/which-key.nvim",
+    --TODO: Try to use this without warning
+    -- opts = function(_, opts)
+    --   -- 添加 '\' 开头的提示组
+    --   opts.defaults["\\"] = {
+    --     name = "\\",             -- 或你喜欢的名字，比如 '+custom'
+    --     d = { name = "+debug" }, -- 这样会提示 \d 有 "debug" 的子命令
+    --   }
+    -- end,
+  },
+  {
     "lervag/vimtex",
     lazy = false, -- we don't want to lazy load VimTeX
     init = function()
@@ -138,7 +149,43 @@ return {
   },
   {
     "latex-lsp/texlab",
-  }
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = { "nvim-neotest/nvim-nio" },
+    keys = {
+      {
+        "<leader>du",
+        function()
+          require("dapui").toggle {}
+        end,
+        desc = "Dap UI",
+      },
+      {
+        "<leader>de",
+        function()
+          require("dapui").eval()
+        end,
+        desc = "Eval",
+        mode = { "n", "v" },
+      },
+    },
+    opts = {},
+    config = function(_, opts)
+      local dap = require "dap"
+      local dapui = require "dapui"
+      dapui.setup(opts)
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dap.repl.open()
+      end
+      -- dap.listeners.before.event_terminated["dapui_config"] = function()
+      -- dapui.close {}
+      -- end
+      -- dap.listeners.before.event_exited["dapui_config"] = function()
+      -- dapui.close {}
+      -- end
+    end,
+  },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
