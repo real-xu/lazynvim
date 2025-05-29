@@ -13,6 +13,9 @@ local function map_all_mode(lhs, rhs, opts)
   vim.keymap.set("t", lhs, rhs, opts)
 end
 -- TODO: make this work
+-- vim.keymap.set("v", "<BS>", function()
+--   vim.print("Pressed"); vim.cmd('d _<CR>')
+-- end, { noremap = true, desc = "Backspace in normal mode" })
 vim.keymap.set("v", "x", '"_x', { noremap = true, desc = "Delete selection with Backspace" })
 map_all_mode("<F5>", function()
   require("dap").continue()
@@ -41,18 +44,10 @@ end, { desc = "Print variable (Hover Mode)" })
 vim.keymap.set({ "n", "v" }, "\\dp", function()
   require("dap.ui.widgets").preview()
 end, { desc = "Print variable (Preview Mode)" })
--- TODO: remove this
--- vim.keymap.set("n", "\\dt", function()
---   require("dapui").toggle()
--- end, { desc = "Toggle debug GUI" })
--- vim.keymap.set({ "n", "v" }, "\\de", function()
---   require("dapui").eval()
--- end, { desc = "Eval variable" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
-vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-vim.keymap.set("i", "<D-s>", "<C-O>:w<CR>")
+map_all_mode("<D-s>", '<Cmd>w<CR>') -- Save
 map_all_mode("<D-w>", function()
   local success, _ = pcall(function() vim.cmd('tabclose') end)
   if not success then
@@ -60,16 +55,14 @@ map_all_mode("<D-w>", function()
   end
 end, { desc = "Close current tab" })
 map_all_mode("<D-z>", function() vim.cmd("undo") end)
-vim.keymap.set("i", "<D-v>", '<C-O>"+p')
+vim.keymap.set("i", "<D-v>", '<C-O>"+P')
 vim.keymap.set("c", "<D-v>", "<C-R>+")
-vim.keymap.set("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
+vim.keymap.set("n", "<D-v>", '"+P', { desc = "Paste from clipboard" })
 vim.keymap.set("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
 vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 vim.keymap.set("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
 -- end
-
-
 -- Set the keymap <leader>fg to trigger the picker
 -- vim.keymap.set("n", "<leader>fg", function()
 --   local Snacks = require("snacks")

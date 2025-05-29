@@ -38,6 +38,18 @@ return {
       vim.g.vimtex_view_method = "skim"
       vim.g.vimtex_view_skim_sync = 1
       vim.g.vimtex_view_skim_activate = 1
+      vim.g.vimtex_compiler_latexmk = {
+        out_dir = "build",    -- use a separate build directory
+        callback = 1,         -- enable callback
+        continuous = 1,       -- enable continuous compilation
+        options = {
+          "-pdf",             -- use pdf output
+          "-shell-escape",    -- enable shell escape
+          "-verbose",         -- verbose output
+          "-file-line-error", -- file line error messages
+        },
+      }
+      -- TODO: This seems not used
       vim.g.vimtex_toc_custom_matchers = {
         { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
         { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
@@ -186,6 +198,9 @@ return {
       -- end
     end,
   },
+  {
+    "flin16/vim-overleaf",
+  }
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
