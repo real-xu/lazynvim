@@ -92,6 +92,10 @@ return {
     }
   },
   {
+    "neoclide/coc.nvim",
+    branch = "release",
+  },
+  {
     "mfussenegger/nvim-dap-python",
     ft = "python",
     dependencies = {
@@ -133,6 +137,7 @@ return {
             exclude = excluded_list,
           },
           explorer = {
+            ignored = true,
             exclude = excluded_list,
           }
         },

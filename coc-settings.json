@@ -1,0 +1,6 @@
+{
+  "suggest.enableFloat": false,
+  "diagnostic.enable": false,
+  "inlayHint.enable": false,
+  "codeLens.enable": true,
+}

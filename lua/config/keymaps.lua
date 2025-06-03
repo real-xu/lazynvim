@@ -45,6 +45,12 @@ vim.keymap.set({ "n", "v" }, "\\dp", function()
   require("dap.ui.widgets").preview()
 end, { desc = "Print variable (Preview Mode)" })
 
+-- Configure Coc.nvim keymaps
+vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
+
+vim.keymap.set("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
+vim.keymap.set("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
+
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
 map_all_mode("<D-s>", '<Cmd>w<CR>') -- Save
@@ -57,7 +63,7 @@ end, { desc = "Close current tab" })
 map_all_mode("<D-z>", function() vim.cmd("undo") end)
 vim.keymap.set("i", "<D-v>", '<C-O>"+P')
 vim.keymap.set("c", "<D-v>", "<C-R>+")
-vim.keymap.set("n", "<D-v>", '"+P', { desc = "Paste from clipboard" })
+vim.keymap.set("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
 vim.keymap.set("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
 vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 vim.keymap.set("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
