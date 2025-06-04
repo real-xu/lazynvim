@@ -1,22 +1,23 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+local keyset = vim.keymap.set
 local function map_nv(lhs, rhs, opts)
   local modes = { "n", "v" }
   for _, mode in ipairs(modes) do
-    vim.keymap.set(mode, lhs, rhs, opts)
+    keyset(mode, lhs, rhs, opts)
   end
 end
 local function map_all_mode(lhs, rhs, opts)
   map_nv(lhs, rhs, opts)
-  vim.keymap.set("i", lhs, rhs, opts)
-  vim.keymap.set("t", lhs, rhs, opts)
+  keyset("i", lhs, rhs, opts)
+  keyset("t", lhs, rhs, opts)
 end
 -- TODO: make this work
--- vim.keymap.set("v", "<BS>", function()
+-- keyset("v", "<BS>", function()
 --   vim.print("Pressed"); vim.cmd('d _<CR>')
 -- end, { noremap = true, desc = "Backspace in normal mode" })
-vim.keymap.set("v", "x", '"_x', { noremap = true, desc = "Delete selection with Backspace" })
+keyset("v", "x", '"_x', { noremap = true, desc = "Delete selection with Backspace" })
 map_all_mode("<F5>", function()
   require("dap").continue()
 end, { desc = "Dap: Continue" })
@@ -32,24 +33,27 @@ end, { desc = "Dap: Step Into" })
 map_all_mode("<F12>", function()
   require("dap").step_out()
 end, { desc = "Dap: Step Out" })
-vim.keymap.set("n", "\\b", function()
+keyset("n", "<leader>dv", function()
+  vim.cmd("DapVirtualTextToggle")
+end, { desc = "Toggle virtual text of dap" })
+keyset("n", "\\b", function()
   require("dap").toggle_breakpoint()
 end, { desc = "Dap: Toggle Breakpoint" })
-vim.keymap.set("n", "\\dr", function()
+keyset("n", "\\dr", function()
   require("dap").repl.open()
 end, { desc = "Dap: Open REPL" })
-vim.keymap.set({ "n", "v" }, "\\dh", function()
+keyset({ "n", "v" }, "\\dh", function()
   require("dap.ui.widgets").hover()
 end, { desc = "Print variable (Hover Mode)" })
-vim.keymap.set({ "n", "v" }, "\\dp", function()
+keyset({ "n", "v" }, "\\dp", function()
   require("dap.ui.widgets").preview()
 end, { desc = "Print variable (Preview Mode)" })
 
 -- Configure Coc.nvim keymaps
-vim.keymap.set("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
+keyset("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
 
-vim.keymap.set("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
-vim.keymap.set("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
+keyset("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
+keyset("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
@@ -61,16 +65,16 @@ map_all_mode("<D-w>", function()
   end
 end, { desc = "Close current tab" })
 map_all_mode("<D-z>", function() vim.cmd("undo") end)
-vim.keymap.set("i", "<D-v>", '<C-O>"+P')
-vim.keymap.set("c", "<D-v>", "<C-R>+")
-vim.keymap.set("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
-vim.keymap.set("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
-vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
-vim.keymap.set("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
+keyset("i", "<D-v>", '<C-O>"+P')
+keyset("c", "<D-v>", "<C-R>+")
+keyset("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
+keyset("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
+keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
+keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
 -- end
 -- Set the keymap <leader>fg to trigger the picker
--- vim.keymap.set("n", "<leader>fg", function()
+-- keyset("n", "<leader>fg", function()
 --   local Snacks = require("snacks")
 --   return Snacks.picker({
 --     finder = "lsp_symbols", -- Use the LSP symbols as the source
