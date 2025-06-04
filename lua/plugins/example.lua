@@ -209,6 +209,7 @@ return {
     version = false, -- Never set this value to "*"! Never!
     opts = {
       -- add any opts here
+	hints = { enabled = false },
       -- for example
       provider = "openai",
       providers = {
