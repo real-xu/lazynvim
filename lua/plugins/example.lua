@@ -271,16 +271,14 @@ return {
     "flin16/vim-overleaf",
   },
   {
-    "Saghen/blink.cmp",
+    "saghen/blink.cmp",
     opts = {
       enabled = function()
-        -- Enable if the filetype is Lua
-        if vim.bo.filetype == "lua" then
-          return true
-        end
+        --Disable when the filetype is tex
+        return vim.bo.filetype ~= "tex"
         -- Enable when there is no file ~/.config/nvim-options/blink-disabled
-        local path = vim.fn.stdpath("config") .. "/blink-disabled"
-        return not vim.loop.fs_stat(path)
+        -- local path = vim.fn.stdpath("config") .. "/blink-disabled"
+        -- return not vim.loop.fs_stat(path)
       end,
     },
   },
