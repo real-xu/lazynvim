@@ -54,17 +54,23 @@ keyset("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
 
 keyset("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
 keyset("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
+-- Resolve Coc conflicting keymaps
+keyset("i", "<C-e>", "<End>", { desc = "Goto end" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
-map_all_mode("<D-s>", '<Cmd>w<CR>') -- Save
+map_all_mode("<D-s>", "<Cmd>w<CR>") -- Save
 map_all_mode("<D-w>", function()
-  local success, _ = pcall(function() vim.cmd('tabclose') end)
+  local success, _ = pcall(function()
+    vim.cmd("tabclose")
+  end)
   if not success then
     vim.notify("Cannot close the last tab page", vim.log.levels.WARN)
   end
 end, { desc = "Close current tab" })
-map_all_mode("<D-z>", function() vim.cmd("undo") end)
+map_all_mode("<D-z>", function()
+  vim.cmd("undo")
+end)
 keyset("i", "<D-v>", '<C-O>"+P')
 keyset("c", "<D-v>", "<C-R>+")
 keyset("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })

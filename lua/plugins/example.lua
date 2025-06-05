@@ -11,11 +11,11 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      kind_filter = { tex = true }
-    }
+      kind_filter = { tex = true },
+    },
   },
   {
-    'tomasr/molokai', -- colorscheme
+    "tomasr/molokai", -- colorscheme
     config = function()
       vim.cmd.colorscheme("molokai")
     end,
@@ -49,14 +49,15 @@ return {
           "-file-line-error", -- file line error messages
         },
       }
-      -- TODO: This seems not used
+      -- Ensuring custom matchers are used
       vim.g.vimtex_toc_custom_matchers = {
         { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
         { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
         { title = "Corollary",  re = [[\v^\s*\\begin\{corollary\}]] },
         { title = "Definition", re = [[\v^\s*\\begin\{definition\}]] },
       }
-    end
+      vim.g.vimtex_toc_matchers = vim.g.vimtex_toc_custom_matchers
+    end,
   },
   {
     "mfussenegger/nvim-lint",
@@ -68,8 +69,8 @@ return {
     },
     config = function()
       local lint = require("lint")
-      lint.linters.ruff.args = { "--ignore=E401", }
-    end
+      lint.linters.ruff.args = { "--ignore=E401" }
+    end,
   },
   {
     "stevearc/conform.nvim",
@@ -80,16 +81,15 @@ return {
         lua = { "/opt/homebrew/bin/lua" },
         tex = { "latexindent" },
       },
-    }
+    },
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {
-        },
+        pyright = {},
       },
-    }
+    },
   },
   {
     "neoclide/coc.nvim",
@@ -139,10 +139,10 @@ return {
           explorer = {
             ignored = true,
             exclude = excluded_list,
-          }
+          },
         },
       },
-    }
+    },
   },
   {
     "mbbill/undotree",
@@ -174,7 +174,7 @@ return {
       {
         "<leader>du",
         function()
-          require("dapui").toggle {}
+          require("dapui").toggle({})
         end,
         desc = "Dap UI",
       },
@@ -189,8 +189,8 @@ return {
     },
     opts = {},
     config = function(_, opts)
-      local dap = require "dap"
-      local dapui = require "dapui"
+      local dap = require("dap")
+      local dapui = require("dapui")
       dapui.setup(opts)
       dap.listeners.after.event_initialized["dapui_config"] = function()
         dap.repl.open()
@@ -258,7 +258,7 @@ return {
       },
       {
         -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
+        "MeanderingProgrammer/render-markdown.nvim",
         opts = {
           file_types = { "markdown", "Avante" },
         },
@@ -268,7 +268,20 @@ return {
   },
   {
     "flin16/vim-overleaf",
-  }
+  },
+  {
+    "Saghen/blink.cmp",
+    opts = {
+      enabled = function()
+        -- Enable when there is no file ~/.config/nvim-options/blink-disabled
+        local path = vim.fn.stdpath("config") .. "/blink-disabled"
+        return not vim.loop.fs_stat(path)
+      end,
+    },
+  },
+  {
+    "giuxtaposition/blink-cmp-copilot",
+  },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --

@@ -3,7 +3,7 @@
 -- Add any additional options here
 vim.o.clipboard = ""
 vim.o.guifont = "Monaco:h16"
-vim.cmd('set wrap')
+vim.cmd("set wrap")
 local dap = require("dap")
 
 dap.adapters.python = {

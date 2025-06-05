@@ -8,3 +8,4 @@ foo.*
 data
 lua/plugins/.example.lua.swp
 lua/plugins/.example.lua.swp
+blink-disabled
