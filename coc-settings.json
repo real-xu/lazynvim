@@ -1,5 +1,5 @@
 {
-  "suggest.enableFloat": false,
+  "suggest.enableFloat": true,
   "diagnostic.enable": false,
   "inlayHint.enable": false,
   "codeLens.enable": true,

@@ -55,7 +55,8 @@ keyset("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
 keyset("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
 keyset("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
 -- Resolve Coc conflicting keymaps
-keyset("i", "<C-e>", "<End>", { desc = "Goto end" })
+-- TODO: recover this
+keyset("i", "<C-e>", "<C-o>$", { desc = "Goto end" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then

@@ -93,6 +93,7 @@ return {
   },
   {
     "neoclide/coc.nvim",
+
     branch = "release",
   },
   {
@@ -273,14 +274,15 @@ return {
     "Saghen/blink.cmp",
     opts = {
       enabled = function()
+        -- Enable if the filetype is Lua
+        if vim.bo.filetype == "lua" then
+          return true
+        end
         -- Enable when there is no file ~/.config/nvim-options/blink-disabled
         local path = vim.fn.stdpath("config") .. "/blink-disabled"
         return not vim.loop.fs_stat(path)
       end,
     },
-  },
-  {
-    "giuxtaposition/blink-cmp-copilot",
   },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
