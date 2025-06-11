@@ -79,3 +79,6 @@ keyset("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste fro
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
+if vim.fn.has("gui_running") == 0 then
+  keyset("v", "<leader>y", '"+y', { desc = "Terminal: copy to system clipboard in visual mode" })
+end
