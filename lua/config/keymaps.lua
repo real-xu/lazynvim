@@ -79,36 +79,3 @@ keyset("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste fro
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
--- end
--- Set the keymap <leader>fg to trigger the picker
--- keyset("n", "<leader>fg", function()
---   local Snacks = require("snacks")
---   return Snacks.picker({
---     finder = "lsp_symbols", -- Use the LSP symbols as the source
---     layout = {
---       layout = {
---         box = "horizontal",
---         width = 0.5,
---         height = 0.5,
---         {
---           box = "vertical",
---           border = "rounded",
---           title = "Find directory",
---           { win = "input", height = 1,     border = "bottom" },
---           { win = "list",  border = "none" },
---         },
---       },
---     },
---     format = 'lsp_symbol',
---     confirm = function(picker, item)
---       picker:close()
---       Snacks.picker.pick("files", {
---         dirs = { item.file },
---       })
---     end,
---     filter = {
---       tex = true,
---     }
---   })
--- end
--- , { desc = "Find LaTeX environments using LSP" }) -- Updated description

@@ -3,4 +3,5 @@
   "diagnostic.enable": false,
   "inlayHint.enable": false,
   "codeLens.enable": true,
+  "snippets.ultisnips.pythonPrompt": false,
 }
