@@ -8,7 +8,6 @@ end
 vim.o.guifont = "Monaco:h16"
 vim.cmd("set wrap")
 local dap = require("dap")
-
 dap.adapters.python = {
   type = "executable",
   command = "python",

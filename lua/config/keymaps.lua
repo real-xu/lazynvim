@@ -13,11 +13,14 @@ local function map_all_mode(lhs, rhs, opts)
   keyset("i", lhs, rhs, opts)
   keyset("t", lhs, rhs, opts)
 end
--- TODO: make this work
--- keyset("v", "<BS>", function()
---   vim.print("Pressed"); vim.cmd('d _<CR>')
--- end, { noremap = true, desc = "Backspace in normal mode" })
-keyset("v", "x", '"_x', { noremap = true, desc = "Delete selection with Backspace" })
+-- Very fundamnetal changes for basic vanila Vim. Each change in this section need explanation.
+-- Making c key less disruptive to normal coppying and pasting
+map_nv("c", '"1c', { desc = "Change and put the deleted part into secondary clipboard" })
+-- Do the same for x key
+map_nv("x", '"1x', { desc = "Delete and put the deleted part into secondary clipboard" })
+-- TODO: This is working now, but only for normal mode. For other mods, please use x key instead.
+keyset("n", "<BS>", '"1d', { noremap = true, desc = "Backspace in normal mode" })
+keyset("v", "x", '"_x', { noremap = true, desc = "Delete without saving to clipboard" })
 map_all_mode("<F5>", function()
   require("dap").continue()
 end, { desc = "Dap: Continue" })
@@ -60,6 +63,8 @@ keyset("i", "<C-e>", "<C-o>$", { desc = "Goto end" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
+keyset("n", "<c-p>", "<Plug>(YankyPreviousEntry)")
+keyset("n", "<c-n>", "<Plug>(YankyNextEntry)")
 map_all_mode("<D-s>", "<Cmd>w<CR>") -- Save
 map_all_mode("<D-w>", function()
   local success, _ = pcall(function()
