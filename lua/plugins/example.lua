@@ -50,13 +50,13 @@ return {
         },
       }
       -- Ensuring custom matchers are used
-      vim.g.vimtex_toc_custom_matchers = {
-        { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
-        { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
-        { title = "Corollary",  re = [[\v^\s*\\begin\{corollary\}]] },
-        { title = "Definition", re = [[\v^\s*\\begin\{definition\}]] },
-      }
-      vim.g.vimtex_toc_matchers = vim.g.vimtex_toc_custom_matchers
+      -- vim.g.vimtex_toc_custom_matchers = {
+      --   { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
+      --   { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
+      --   { title = "Corollary",  re = [[\v^\s*\\begin\{corollary\}]] },
+      --   { title = "Definition", re = [[\v^\s*\\begin\{definition\}]] },
+      -- }
+      -- vim.g.vimtex_toc_matchers = vim.g.vimtex_toc_custom_matchers
     end,
   },
   {
@@ -204,7 +204,19 @@ return {
       -- end
     end,
   },
+  -- TODO: reduce annoying notifications
   { "HakonHarnes/img-clip.nvim" },
+  -- TODO: test this
+  { "petertriho/nvim-scrollbar" },
+  {
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+      { "ibhagwan/fzf-lua" },
+      -- .. or via snacks
+    },
+    event = "LspAttach",
+    opts = {},
+  },
   -- {
   --   "yetone/avante.nvim",
   --   event = "VeryLazy",

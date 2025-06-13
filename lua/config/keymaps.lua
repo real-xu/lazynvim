@@ -16,11 +16,24 @@ end
 -- Very fundamnetal changes for basic vanila Vim. Each change in this section need explanation.
 -- Making c key less disruptive to normal coppying and pasting
 map_nv("c", '"1c', { desc = "Change and put the deleted part into secondary clipboard" })
--- Do the same for x key
+map_nv("C", '"1C', { desc = "Change and put the deleted part into secondary clipboard" })
+-- Commented otherwise we could not use xp to interchange
 map_nv("x", '"1x', { desc = "Delete and put the deleted part into secondary clipboard" })
--- TODO: This is working now, but only for normal mode. For other mods, please use x key instead.
+map_nv("X", '"1X', { desc = "Delete and put the deleted part into secondary clipboard" })
+map_nv("<C-d>", '"1d', { desc = "Delete and put the deleted part into secondary clipboard" })
 keyset("n", "<BS>", '"1d', { noremap = true, desc = "Backspace in normal mode" })
-keyset("v", "x", '"_x', { noremap = true, desc = "Delete without saving to clipboard" })
+keyset("o", "<BS>", 'd', { noremap = true, desc = "Backspace in normal mode" })
+--TODO: This does not work due to which-key
+keyset({ "x", "v" }, "<BS>", '"1x', { noremap = true, desc = "Backspace in normal mode" })
+-- keyset("v", "x", '"_x', { noremap = true, desc = "Delete without saving to clipboard" })
+--Config lsp vimtex keymaps
+-- TODO: make this workqq
+-- vim.keymap.set("n", "<locallleader>ls", function()
+--   vim.b.vimtex_main = vim.fn.expand("%:p")
+--   vim.cmd("VimtexReloadState")
+-- end, { noremap = true, desc = "Set current buffer as vimtex main" })
+
+-- Config Dap keymaps
 map_all_mode("<F5>", function()
   require("dap").continue()
 end, { desc = "Dap: Continue" })
@@ -39,27 +52,29 @@ end, { desc = "Dap: Step Out" })
 keyset("n", "<leader>dv", function()
   vim.cmd("DapVirtualTextToggle")
 end, { desc = "Toggle virtual text of dap" })
-keyset("n", "\\b", function()
+keyset("n", "<localleader>b", function()
   require("dap").toggle_breakpoint()
 end, { desc = "Dap: Toggle Breakpoint" })
-keyset("n", "\\dr", function()
+keyset("n", "<localleader>dr", function()
   require("dap").repl.open()
 end, { desc = "Dap: Open REPL" })
-keyset({ "n", "v" }, "\\dh", function()
+keyset({ "n", "v" }, "<localleader>dh", function()
   require("dap.ui.widgets").hover()
 end, { desc = "Print variable (Hover Mode)" })
-keyset({ "n", "v" }, "\\dp", function()
+keyset({ "n", "v" }, "<localleader>dp", function()
   require("dap.ui.widgets").preview()
 end, { desc = "Print variable (Preview Mode)" })
 
 -- Configure Coc.nvim keymaps
-keyset("n", "<leader>rn", "<Plug>(coc-rename)", { desc = "Coc: Rename" })
+keyset("n", "<localleader>r", "<Plug>(coc-rename)", { desc = "Rename (Coc)" })
+keyset("v", "<localleader>r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Refactor Selected (Coc)" })
+keyset("n", "<localleader>cl", "<Plug>(coc-codelens-action)", { desc = "CodeLens Action (Coc)" })
+keyset("n", "<localleader>ca", "<Plug>(coc-codeaction)", { desc = "Code Action (Coc)" })
+keyset("v", "<localleader>ca", "<Plug>(coc-codeaction-selected)", { desc = "Code Action (Coc)" })
 
-keyset("v", "\\r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Coc: Refactor Selected" })
-keyset("n", "\\cl", "<Plug>(coc-codelens-action)", { desc = "Coc: CodeLens Action" })
 -- Resolve Coc conflicting keymaps
--- TODO: recover this
-keyset("i", "<C-e>", "<C-o>$", { desc = "Goto end" })
+keyset({ "i", "c" }, "<C-a>", "<C-o>^", { desc = "Goto beginning" })
+keyset({ "i", "c" }, "<C-e>", "<C-o>$", { desc = "Goto end" })
 
 -- Now configure shortcuts for MacOS
 -- if vim.g.neovide then
@@ -80,10 +95,10 @@ end)
 keyset("i", "<D-v>", '<C-O>"+P')
 keyset("c", "<D-v>", "<C-R>+")
 keyset("n", "<D-v>", '"+p', { desc = "Paste from clipboard" })
-keyset("v", "<D-v>", '"_d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
+keyset("v", "<D-v>", '"1d"+gP', { desc = "Remove the selected part and paste from system clipboard." })
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
-if vim.fn.has("gui_running") == 0 then
-  keyset("v", "<leader>y", '"+y', { desc = "Terminal: copy to system clipboard in visual mode" })
-end
+--integrate coc with lsp
+--TODO:make this work
+-- local function code_action_merge()
