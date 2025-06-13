@@ -211,6 +211,26 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     dependencies = {
+      { "nvim-lua/plenary.nvim" },
+
+      -- optional picker via telescope
+      { "nvim-telescope/telescope.nvim" },
+      -- optional picker via fzf-lua
+      { "ibhagwan/fzf-lua" },
+      -- .. or via snacks
+      {
+        "folke/snacks.nvim",
+        opts = {
+          terminal = {},
+        }
+      }
+    },
+    event = "LspAttach",
+    opts = {},
+  },
+  {
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
       { "ibhagwan/fzf-lua" },
       -- .. or via snacks
     },
@@ -286,13 +306,13 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
-      enabled = function()
-        --Disable when the filetype is tex
-        return vim.bo.filetype ~= "tex"
-        -- Enable when there is no file ~/.config/nvim-options/blink-disabled
-        -- local path = vim.fn.stdpath("config") .. "/blink-disabled"
-        -- return not vim.loop.fs_stat(path)
-      end,
+      -- enabled = function()
+      --   --Disable when the filetype is tex
+      --   return vim.bo.filetype ~= "tex"
+      --   -- Enable when there is no file ~/.config/nvim-options/blink-disabled
+      --   -- local path = vim.fn.stdpath("config") .. "/blink-disabled"
+      --   -- return not vim.loop.fs_stat(path)
+      -- end,
     },
   },
 }
