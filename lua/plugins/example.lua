@@ -22,14 +22,17 @@ return {
   },
   {
     "folke/which-key.nvim",
-    --TODO: Try to use this without warning
-    -- opts = function(_, opts)
-    --   -- 添加 '\' 开头的提示组
-    --   opts.defaults["\\"] = {
-    --     name = "\\",             -- 或你喜欢的名字，比如 '+custom'
-    --     d = { name = "+debug" }, -- 这样会提示 \d 有 "debug" 的子命令
-    --   }
-    -- end,
+    -- TODO: Try to use this without warning
+    opts = {
+      spec = {
+        { "<localleader>c", group = "code" },
+        { "<localleader>d", group = "debug" },
+        { "<localleader>r", icon = "󰑕", group = "Rename (COC)" },
+        { "<leader>a", group = "AI" }
+      },
+      -- name = "\\",
+      -- d = { name = "+debug" },
+    },
   },
   {
     "lervag/vimtex",
@@ -49,14 +52,6 @@ return {
           "-file-line-error", -- file line error messages
         },
       }
-      -- Ensuring custom matchers are used
-      -- vim.g.vimtex_toc_custom_matchers = {
-      --   { title = "Theorem",    re = [[\v^\s*\\begin\{theorem\}]] },
-      --   { title = "Lemma",      re = [[\v^\s*\\begin\{lemma\}]] },
-      --   { title = "Corollary",  re = [[\v^\s*\\begin\{corollary\}]] },
-      --   { title = "Definition", re = [[\v^\s*\\begin\{definition\}]] },
-      -- }
-      -- vim.g.vimtex_toc_matchers = vim.g.vimtex_toc_custom_matchers
     end,
   },
   {
@@ -210,8 +205,8 @@ return {
         "folke/snacks.nvim",
         opts = {
           terminal = {},
-        }
-      }
+        },
+      },
     },
     event = "LspAttach",
     opts = {},
@@ -219,7 +214,57 @@ return {
   {
     "flin16/vim-overleaf",
   },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "VeryLazy",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+  },
 
+  {
+    "olimorris/codecompanion.nvim",
+    dependencies = {
+      "echasnovski/mini.diff",
+      "j-hui/fidget.nvim",
+    },
+
+    init = function()
+      require("utils.codecompanion_fidget_spinner"):init()
+    end,
+
+    -- stylua: ignore
+    keys = {
+      { "<leader>aa", "<CMD>CodeCompanionActions<CR>",     mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion actions" },
+      { "<leader>ai", "<CMD>CodeCompanion<CR>",            mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion inline" },
+      { "<leader>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion chat (toggle)" },
+      { "<leader>ap", "<CMD>CodeCompanionChat Add<CR>",    mode = { "v" },      noremap = true, silent = true, desc = "CodeCompanion chat add code" },
+    },
+
+    opts = {
+      display = {
+        diff = {
+          enabled = true,
+          provider = "mini_diff",
+        },
+      },
+
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+      },
+
+      opts = {
+        language = "English", -- "English"|"Chinese"
+      },
+    },
+  },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
