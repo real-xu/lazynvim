@@ -5,6 +5,8 @@
 if vim.fn.has("gui_running") == 1 then
   vim.o.clipboard = ""
 end
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-Tab>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.o.guifont = "Monaco:h16"
 vim.cmd("set wrap")
 local dap = require("dap")

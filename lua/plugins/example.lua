@@ -28,7 +28,7 @@ return {
         { "<localleader>c", group = "code", mode = { "n", "v" } },
         { "<localleader>d", group = "debug", mode = { "n", "v" } },
         { "<localleader>r", icon = "󰑕", group = "Rename (COC)" },
-        { "<leader>a", group = "AI", mode = { "n", "v" } }
+        { "<leader>a", group = "AI", mode = { "n", "v" } },
       },
       -- name = "\\",
       -- d = { name = "+debug" },
@@ -42,13 +42,13 @@ return {
       vim.g.vimtex_view_skim_sync = 1
       vim.g.vimtex_view_skim_activate = 1
       vim.g.vimtex_compiler_latexmk = {
-        out_dir = "build",    -- use a separate build directory
-        callback = 1,         -- enable callback
-        continuous = 1,       -- enable continuous compilation
+        out_dir = "build", -- use a separate build directory
+        callback = 1, -- enable callback
+        continuous = 1, -- enable continuous compilation
         options = {
-          "-pdf",             -- use pdf output
-          "-shell-escape",    -- enable shell escape
-          "-verbose",         -- verbose output
+          "-pdf", -- use pdf output
+          "-shell-escape", -- enable shell escape
+          "-verbose", -- verbose output
           "-file-line-error", -- file line error messages
         },
       }
@@ -73,7 +73,7 @@ return {
       formatters_by_ft = {
         python = { "black" },
         sh = { "shfmt" },
-        lua = { "/opt/homebrew/bin/lua" },
+        lua = { "stylua" },
         tex = { "latexindent" },
       },
     },
@@ -236,11 +236,39 @@ return {
       require("utils.codecompanion_fidget_spinner"):init()
     end,
     keys = {
-      { "<leader>aa", "<CMD>CodeCompanionActions<CR>",     mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion actions" },
+      {
+        "<leader>aa",
+        "<CMD>CodeCompanionActions<CR>",
+        mode = { "n", "v" },
+        noremap = true,
+        silent = true,
+        desc = "CodeCompanion actions",
+      },
       -- Map <leader>ai to run CodeCompanion on the selected range in normal and visual modes
-      { "<leader>ai", "<CMD>'<,'>CodeCompanion<CR>",       mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion inline" },
-      { "<leader>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion chat (toggle)" },
-      { "<leader>ap", "<CMD>CodeCompanionChat Add<CR>",    mode = { "v" },      noremap = true, silent = true, desc = "CodeCompanion chat add code" },
+      {
+        "<leader>ai",
+        "<CMD>'<,'>CodeCompanion<CR>",
+        mode = { "n", "v" },
+        noremap = true,
+        silent = true,
+        desc = "CodeCompanion inline",
+      },
+      {
+        "<leader>ac",
+        "<CMD>CodeCompanionChat Toggle<CR>",
+        mode = { "n", "v" },
+        noremap = true,
+        silent = true,
+        desc = "CodeCompanion chat (toggle)",
+      },
+      {
+        "<leader>ap",
+        "<CMD>CodeCompanionChat Add<CR>",
+        mode = { "v" },
+        noremap = true,
+        silent = true,
+        desc = "CodeCompanion chat add code",
+      },
     },
     opts = {
       display = {
@@ -264,6 +292,7 @@ return {
     opts = {
       default_mappings = false,
       mappings = {
+        set = "m",
         set_next = "m,",
         toggle = "m;",
         delete_line = "dm-",
@@ -275,11 +304,49 @@ return {
         prev = "[`",
         -- TODO: This seems not working
         -- annotate = "m*",
-      }
-    }
+      },
+    },
   },
   { "rachartier/tiny-code-action.nvim" },
-  { "xiyaowong/coc-code-action-menu.nvim" },
+  {
+    "nvimtools/none-ls.nvim",
+    event = "LazyFile",
+    init = function()
+      LazyVim.on_very_lazy(function()
+        -- register the formatter with LazyVim
+        LazyVim.format.register({
+          name = "none-ls.nvim",
+          priority = 1, -- set higher than conform, the builtin formatter
+          primary = true,
+          format = function(buf)
+            return LazyVim.lsp.format({
+              bufnr = buf,
+              filter = function(client)
+                return client.name == "null-ls"
+              end,
+            })
+          end,
+          sources = function(buf)
+            local ret = require("null-ls.sources").get_available(vim.bo[buf].filetype, "NULL_LS_FORMATTING") or {}
+            return vim.tbl_map(function(source)
+              return source.name
+            end, ret)
+          end,
+        })
+      end)
+    end,
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.root_dir = opts.root_dir
+        or require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git")
+      opts.sources = vim.list_extend(opts.sources or {}, {
+        -- nls.builtins.formatting.fish_indent,
+        -- nls.builtins.diagnostics.fish,
+        -- nls.builtins.formatting.stylua,
+        -- nls.builtins.formatting.shfmt,
+      })
+    end,
+  },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --

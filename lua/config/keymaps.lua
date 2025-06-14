@@ -22,7 +22,7 @@ map_nv("x", '"1x', { desc = "Delete and put the deleted part into secondary clip
 map_nv("X", '"1X', { desc = "Delete and put the deleted part into secondary clipboard" })
 map_nv("<C-d>", '"1d', { desc = "Delete and put the deleted part into secondary clipboard" })
 keyset("n", "<BS>", '"1d', { noremap = true, desc = "Backspace in normal mode" })
-keyset("o", "<BS>", 'd', { noremap = true, desc = "Backspace in normal mode" })
+keyset("o", "<BS>", "d", { noremap = true, desc = "Backspace in normal mode" })
 --TODO: This does not work due to which-key
 keyset({ "x", "v" }, "<BS>", '"1x', { noremap = true, desc = "Backspace in normal mode" })
 -- keyset("v", "x", '"_x', { noremap = true, desc = "Delete without saving to clipboard" })
@@ -69,6 +69,7 @@ end, { desc = "Print variable (Preview Mode)" })
 keyset("n", "<localleader>r", "<Plug>(coc-rename)", { desc = "Rename (Coc)" })
 keyset("v", "<localleader>r", "<Plug>(coc-codeaction-refactor-selected)", { desc = "Refactor Selected (Coc)" })
 keyset("n", "<localleader>cl", "<Plug>(coc-codelens-action)", { desc = "CodeLens Action (Coc)" })
+-- Code actions are actually twisted by another plugin
 keyset("n", "<localleader>ca", "<Plug>(coc-codeaction)", { desc = "Code Action (Coc)" })
 keyset("v", "<localleader>ca", "<Plug>(coc-codeaction-selected)", { desc = "Code Action (Coc)" })
 
@@ -99,7 +100,8 @@ keyset("v", "<D-v>", '"1d"+gP', { desc = "Remove the selected part and paste fro
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
--- Test: Code action Menu
-vim.keymap.set("n", "<leader>m", function()
+-- Code action menu
+vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+  ---@diagnostic disable-next-line: missing-parameter
   require("tiny-code-action").code_action()
 end, { noremap = true, silent = true })
