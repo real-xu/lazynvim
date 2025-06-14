@@ -99,6 +99,7 @@ keyset("v", "<D-v>", '"1d"+gP', { desc = "Remove the selected part and paste fro
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
---integrate coc with lsp
---TODO:make this work
--- local function code_action_merge()
+-- Test: Code action Menu
+vim.keymap.set("n", "<leader>m", function()
+  require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })

@@ -1,7 +1,7 @@
 {
-  "suggest.enableFloat": true,
+  "suggest.enableFloat": false,
   "diagnostic.enable": false,
   "inlayHint.enable": false,
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "snippets.ultisnips.pythonPrompt": false,
 }

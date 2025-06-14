@@ -25,10 +25,10 @@ return {
     -- TODO: Try to use this without warning
     opts = {
       spec = {
-        { "<localleader>c", group = "code" },
-        { "<localleader>d", group = "debug" },
+        { "<localleader>c", group = "code", mode = { "n", "v" } },
+        { "<localleader>d", group = "debug", mode = { "n", "v" } },
         { "<localleader>r", icon = "󰑕", group = "Rename (COC)" },
-        { "<leader>a", group = "AI" }
+        { "<leader>a", group = "AI", mode = { "n", "v" } }
       },
       -- name = "\\",
       -- d = { name = "+debug" },
@@ -227,26 +227,21 @@ return {
       },
     },
   },
-
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
-      "echasnovski/mini.diff",
       "j-hui/fidget.nvim",
     },
-
     init = function()
       require("utils.codecompanion_fidget_spinner"):init()
     end,
-
-    -- stylua: ignore
     keys = {
       { "<leader>aa", "<CMD>CodeCompanionActions<CR>",     mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion actions" },
-      { "<leader>ai", "<CMD>CodeCompanion<CR>",            mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion inline" },
+      -- Map <leader>ai to run CodeCompanion on the selected range in normal and visual modes
+      { "<leader>ai", "<CMD>'<,'>CodeCompanion<CR>",       mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion inline" },
       { "<leader>ac", "<CMD>CodeCompanionChat Toggle<CR>", mode = { "n", "v" }, noremap = true, silent = true, desc = "CodeCompanion chat (toggle)" },
       { "<leader>ap", "<CMD>CodeCompanionChat Add<CR>",    mode = { "v" },      noremap = true, silent = true, desc = "CodeCompanion chat add code" },
     },
-
     opts = {
       display = {
         diff = {
@@ -254,17 +249,37 @@ return {
           provider = "mini_diff",
         },
       },
-
       strategies = {
         chat = { adapter = "copilot" },
         inline = { adapter = "copilot" },
       },
-
       opts = {
         language = "English", -- "English"|"Chinese"
       },
     },
   },
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {
+      default_mappings = false,
+      mappings = {
+        set_next = "m,",
+        toggle = "m;",
+        delete_line = "dm-",
+        delete_buf = "dm<space>",
+        preview = "m:",
+        delete = "dm",
+        delete_bookmark = "dm=",
+        next = "]`",
+        prev = "[`",
+        -- TODO: This seems not working
+        -- annotate = "m*",
+      }
+    }
+  },
+  { "rachartier/tiny-code-action.nvim" },
+  { "xiyaowong/coc-code-action-menu.nvim" },
 }
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
 --
