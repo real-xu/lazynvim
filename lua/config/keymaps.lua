@@ -100,6 +100,10 @@ keyset("v", "<D-v>", '"1d"+gP', { desc = "Remove the selected part and paste fro
 keyset("v", "<D-c>", '"+y', { desc = "Copy to clipboard in visual mode" })
 keyset("v", "<D-x>", '"+d', { desc = "Cut to clipboard" })
 map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
+if vim.env.ALACRITTY_SOCKET then
+  keyset("n", "<C-Tab>", ":BufferLineCycleNext<CR>", { silent = true })
+  keyset("n", "<C-S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+end
 -- Code action menu
 vim.keymap.set({ "n", "v" }, "<leader>ca", function()
   ---@diagnostic disable-next-line: missing-parameter

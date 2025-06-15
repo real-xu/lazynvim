@@ -75,6 +75,12 @@ return {
           "-file-line-error", -- file line error messages
         },
       }
+      vim.g.vimtex_syntax_custom_cmds = {
+        { name = "mb", mathmode = 1, argstyle = "bold", conceal = 1 },
+        { name = "mf", mathmode = 1, argstyle = "boldital", conceal = 1 },
+        { name = "mc", mathmode = 1, argstyle = "ital", conceal = 1 },
+        { name = "mk", mathmode = 1, argstyle = "bold", conceal = 1 },
+      }
     end,
   },
   {
@@ -249,7 +255,7 @@ return {
         help = true,
       },
       keymap = {
-        accept = "<C-Tab>",
+        accept = false, -- handled by blink
       },
     },
   },
