@@ -17,6 +17,7 @@ elseif vim.fn.has("wsl") == 1 then
     },
     cache_enabled = 0,
   }
+  vim.opt.fileformat = "unix"
 end
 vim.g.copilot_no_tab_map = true
 vim.o.guifont = "Monaco:h16"
