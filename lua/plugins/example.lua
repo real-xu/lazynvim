@@ -2,7 +2,7 @@
 -- stylua: ignore
 local excluded_list = {
   "*.pdf", "*.aux", "*.bbl", "*.bcf", "*.blg", "*.fdb_latexmk", "*.fls", "*.log", "*.pdf", "*.run%.xml",
-  "*.synctex%.gz", "*.out", "*.toc", "*.pyc", "*.pyo", "*.xml", "*.gz", "*.DS_Store", "*.zip",
+  "*.synctex%.gz", "*.out", "*.toc", "*.pyc", "*.pyo", "*.gz", "*.DS_Store", "*.zip",
   "__pycache__",
   "venv",
   ".git",
