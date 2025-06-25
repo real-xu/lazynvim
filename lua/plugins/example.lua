@@ -2,7 +2,7 @@
 -- stylua: ignore
 local excluded_list = {
   "*.pdf", "*.aux", "*.bbl", "*.bcf", "*.blg", "*.fdb_latexmk", "*.fls", "*.log", "*.pdf", "*.run%.xml",
-  "*.synctex%.gz", "*.out", "*.toc", "*.pyc", "*.pyo", "*.xml", "*.gz", "*.DS_Store", "*.zip",
+  "*.synctex%.gz", "*.out", "*.toc", "*.pyc", "*.pyo", "*.gz", "*.DS_Store", "*.zip",
   "__pycache__",
   "venv",
   ".git",
@@ -13,29 +13,6 @@ return {
     opts = {
       kind_filter = { tex = true },
     },
-  },
-  {
-    "mfussenegger/nvim-dap",
-    config = function()
-      local dap = require("dap")
-      dap.adapters.python = {
-        type = "executable",
-        command = "python",
-        args = { "-m", "debugpy.adapter" },
-      }
-
-      dap.configurations.python = {
-        {
-          type = "python",
-          request = "launch",
-          name = "Launch file",
-          program = "${file}",
-          pythonPath = function()
-            return "python"
-          end,
-        },
-      }
-    end,
   },
   {
     "tomasr/molokai", -- colorscheme
@@ -119,6 +96,9 @@ return {
     "neoclide/coc.nvim",
 
     branch = "release",
+    config = function()
+      vim.b.coc_suggest_disable = true
+    end,
   },
   {
     "mfussenegger/nvim-dap-python",
@@ -127,7 +107,25 @@ return {
       "mfussenegger/nvim-dap",
     },
     config = function()
-      require("dap-python").setup("python")
+      local dap = require("dap")
+      dap.adapters.python = {
+        type = "executable",
+        command = "python",
+        args = { "-m", "debugpy.adapter" },
+      }
+
+      dap.configurations.python = {
+        {
+          type = "python",
+          request = "launch",
+          name = "Launch file",
+          console = "integratedTerminal",
+          program = "${file}",
+          pythonPath = function()
+            return "python"
+          end,
+        },
+      }
     end,
   },
   {
@@ -206,14 +204,15 @@ return {
       local dapui = require("dapui")
       dapui.setup(opts)
       dap.listeners.after.event_initialized["dapui_config"] = function()
-        dap.repl.open()
+        dapui.open()
       end
+      -- This would make dapui exit too early
       -- dap.listeners.before.event_terminated["dapui_config"] = function()
-      -- dapui.close {}
+      --   dapui.close({})
       -- end
-      -- dap.listeners.before.event_exited["dapui_config"] = function()
-      -- dapui.close {}
-      -- end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close({})
+      end
     end,
   },
   -- TODO: reduce annoying notifications
@@ -242,6 +241,7 @@ return {
   },
   {
     "flin16/vim-overleaf",
+    ft = { "bib", "tex", "latex" },
   },
   {
     "zbirenbaum/copilot.lua",

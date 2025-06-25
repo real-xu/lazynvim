@@ -103,6 +103,9 @@ map_nv("<D-a>", "gg<S-v>G", { desc = "Select all" })
 if vim.env.ALACRITTY_SOCKET then
   keyset("n", "<C-Tab>", ":BufferLineCycleNext<CR>", { silent = true })
   keyset("n", "<C-S-Tab>", ":BufferLineCyclePrev<CR>", { silent = true })
+  keyset("i", "<C-Tab>", function()
+    require("copilot.suggestion").accept()
+  end, { silent = true, desc = "Copilot Accept Suggestion" })
 end
 -- Code action menu
 vim.keymap.set({ "n", "v" }, "<leader>ca", function()
