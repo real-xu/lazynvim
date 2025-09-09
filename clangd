@@ -1,0 +1,19 @@
+.clangd 
+
+CompileFlags:
+  Remove:
+    - "-fno-allow-store-data-races"
+    - "-femit-struct-debug-baseonly"
+    - "-fconserve-stack"
+    - "-mstack-protector-guard=sysreg"
+    - "-mstack-protector-guard-offset=1152"
+    - "-mstack-protector-guard-reg=sp_el0"
+    - "-ftrivial-auto-var-init=zero"
+    - "-enable-trivial-auto-var-init-zero-knowing-it-will-be-removed-from-clang"
+    - "--target"
+    - "-mabi=lp64"
+    - "-march=armv8.5-a"
+  Add:
+    - "--target=aarch64-none-linux-gnu"
+    - "-I/home/username/kernel-5.15/kernel/include"
+    - "-I/home/username/kernel-5.15/kernel/arch/arm64/include"
